@@ -1,0 +1,2 @@
+creds/**
+!creds/this_folder_is_for_credentials
