@@ -26,6 +26,6 @@ You can also set an alias do you don't have to type all that ouch each time you 
 `docker push 12345.dkr.ecr.us-west-1.amazonaws.com/alpine:3.12.1`
 
 ### For Windows Powershell, setting a Function and then an Alias
-PowerShell's Set-Alias command does not allow multiple values.  So we have to create a function first, and then call the function with the Alias.  May be pointless to have an Alias since you can just use the Function. But the Alias calling a Function seems faster for some reason (could be coincidental).
+PowerShell's Set-Alias command does not allow multiple values.  So we have to create a function first, and then call the function with the Alias.  May be pointless to have an Alias since you can just use the Function. But the Alias calling a Function seems faster for some reason (could be coincidental).  
 `function aws_docker($a, $b, $c, $d, $e) { docker run --rm --name aws-cli -v C:\Users\WingsLikeEagles\.aws\credentials:/root/.aws/credentials -it aws-cli-docker:20201030-3 /usr/bin/aws $a $b $c $d $e $f}`
 `Set-Alias -Name aws -Value aws_docker`
