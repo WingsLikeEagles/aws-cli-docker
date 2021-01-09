@@ -24,7 +24,7 @@ You can also set an alias do you don't have to type all that ouch each time you 
 `docker run --rm --name aws-cli -v C:\Users\WingsLikeEagles\.aws\credentials:/root/.aws/credentials -it aws-cli-docker:20201030-3 /usr/bin/aws ecr get-login-password | docker login -u AWS --password-stdin 12345.dkr.ecr.us-west-1.amazonaws.com`  
   
 NOTE: If you get an error `An error occurred (InvalidSignatureException) when calling the GetAuthorizationToken operation: Signature expired: ...` this may be due to Docker for Windows not syncing time properly when you hybernate.  Docker WSL gets out of time sync.  
-```The problem only appears if you use Windows hibernation. Which is - for a notebook and former macOS user - a fairly common task. Anyways. If you put your machine a sleep using hibernation, the underlying Docker virtual machine (running in HyperV) will be hibernated too. However, when waking up your machine again, ```  
+```The problem only appears if you use Windows hibernation. Which is - for a notebook and former macOS user - a fairly common task. Anyways. If you put your machine a sleep using hibernation, the underlying Docker virtual machine (running in HyperV) will be hibernated too. However, when waking up your machine again, time synchronization doesn't work anymore.```  
 You can fix this by open the WSL shell and issue the command `hwclosk -s`  
   
 
