@@ -22,6 +22,14 @@ You can also set an alias do you don't have to type all that out each time you w
 # MFA - Multi Factor Authentication
 If you keep getting permission denied errors, you may need to get a temporary credential if you have MFA enabled on your account.
 https://aws.amazon.com/premiumsupport/knowledge-center/authenticate-mfa-cli/
+
+Temporary credentials are obtained using the STS command like below:  
+`docker run --rm --name aws-cli -v /Users/jroysdon/.aws/credentials:/root/.aws/credentials -it aws-cli-docker:20211022 aws --profile testing sts get-session-token --serial-number arn:aws:iam::<account_number_here>:mfa/justin.roysdon --token-code 123456`  
+
+You need to register a MFA device with the AWS Console under "Security Credentials".  
+- The Serial Number shows up on that screen as well. It has a format like: `arn:aws:iam::1234567890:mfa/justin.roysdon`  
+- The "--token-code" is the rotating code that you get from your MFA device.  
+More details to come.
     
 # Examples
 ### Get Docker Login token to push to AWS ECR:
