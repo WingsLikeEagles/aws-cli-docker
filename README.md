@@ -1,6 +1,8 @@
 # aws-cli-docker
 Docker image with aws-cli  
 
+Now with AWS CLI v2
+
 # Build
     docker build -t aws-cli-docker:yourtaghere .  
 
