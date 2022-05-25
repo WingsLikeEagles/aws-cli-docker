@@ -27,6 +27,20 @@ You can also set an alias do you don't have to type all that out each time you w
 # MFA - Multi Factor Authentication
 If you keep getting permission denied errors, you may need to get a temporary credential if you have MFA enabled on your account.
 https://aws.amazon.com/premiumsupport/knowledge-center/authenticate-mfa-cli/
+
+I use the below Function on a Mac or Linux to populate a temporary Profile with the STS Session Token.  It reads a Code from the user and sends that in with the STS request:  
+
+```
+get-token () 
+{ 
+    PROFILE="token";
+    read -p "Enter code: " CODE;
+    read AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_SESSION_EXPIRATION <<< $(aws-cli --profile=default sts get-session-token --serial-number arn:aws-us-gov:iam::123456789012:mfa/your.username --output text --token-code $CODE | awk '{ print $2, $4, $5, $3 }');
+    docker run --rm --name aws-cli -v /Users/your.username/.aws/credentials:/root/.aws/credentials -v /Users/your.username/.aws/config:/root/.aws/config -i aws-cli-docker:20211022 aws --profile $PROFILE configure set aws_access_key_id "$AWS_ACCESS_KEY_ID";
+    docker run --rm --name aws-cli -v /Users/your.username/.aws/credentials:/root/.aws/credentials -v /Users/your.username/.aws/config:/root/.aws/config -i aws-cli-docker:20211022 aws --profile $PROFILE configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY";
+    docker run --rm --name aws-cli -v /Users/your.username/.aws/credentials:/root/.aws/credentials -v /Users/your.username/.aws/config:/root/.aws/config -i aws-cli-docker:20211022 aws --profile $PROFILE configure set aws_session_token "$AWS_SESSION_TOKEN"
+}
+```
     
 # Examples
 ### Get Docker Login token to push to AWS ECR:
