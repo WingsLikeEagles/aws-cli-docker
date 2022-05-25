@@ -1,7 +1,10 @@
 # aws-cli-docker
 Docker image with aws-cli  
 
-Now with AWS CLI v2
+Now with AWS CLI v2  
+Updated to apline:3.16.0  
+Uses AWS CLI Version 2.1.39
+
 
 # Build
     docker build -t aws-cli-docker:yourtaghere .  
