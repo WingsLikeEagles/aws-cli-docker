@@ -2,14 +2,17 @@
 Docker image with aws-cli  
 
 Now with AWS CLI v2  
-Updated to apline:3.16.0  
-Uses AWS CLI Version 2.1.39
+Updated to apline:3.16.2  
+Uses AWS CLI Version 2.7.34
 
 
 # Build
     docker build -t aws-cli-docker:yourtaghere .  
-
-
+  
+To build with an alternate Dockerfile:  
+    docker built -t aws-cli-v2:yourtaghere -f Dockerfile-aws .  
+  
+  
 # Usage
     docker run --rm --name aws-cli-test -v /Full/Path/to/local/credentials/file:/root/.aws/credentials -it aws-cli-docker:yourtaghere /usr/bin/aws ec2 describe-instances  
 
